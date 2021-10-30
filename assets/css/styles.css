@@ -2,9 +2,13 @@
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     box-sizing: border-box;
 }
+
+
 body {
     text-align: center;
 }
+
+
 header {
     margin: auto 0;
     padding: 50px;
@@ -31,6 +35,26 @@ p {
     margin: auto;
     width: 400px;
     height: 100px;
+    background-color: purple;
+    border-radius: 15px;
+}
+
+.answer-list {
+    width: 20%;
+    height: 300px;
+    margin: 20px auto 20px 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-between;
+}
+
+.answer {
+    font-size: 20px;
+    color: white;
+    margin: auto;
+    width: 200px;
+    height: 50px;
     background-color: purple;
     border-radius: 15px;
 }
