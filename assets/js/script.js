@@ -1,37 +1,152 @@
+/* start quiz, 
+    start timer,
+        reduce time by 10s on an incorrect answer
+    populate quiz, 
+        click button to advance quiz
+        */
+
+
 var quizArea = document.querySelector("#quiz-area");
 var startButton = document.querySelector("#start");
+var time = 75;
 
-// var questions = [
-//     test1, 
-//     test2,
-//     test3,
-//     test4
-// ];
+const quizQuestions = [
+    {
+        question: "Test",
+        answers: {
+            1: "test",
+            2: "test",
+            3: "test",
+            4: "test",
+        },
+        correctAnswer: "2"
+    },
+    {
+        question: "Tes2t",
+        answers: {
+            1: "test",
+            2: "test",
+            3: "test",
+            4: "test",
+        },
+        correctAnswer: "4"
+    },
+    {
+        question: "Tes3t",
+        answers: {
+            1: "test",
+            2: "test",
+            3: "test",
+            4: "test",
+        },
+        correctAnswer: "2"
+    },
+    {
+        question: "Tes4t",
+        answers: {
+            1: "test",
+            2: "test",
+            3: "test",
+            4: "test",
+        },
+        correctAnswer: "1"
+    }
+]
 
-// var answers = [
-//     [ test-1-1, test-1-2, test-1-3, test-1-4], 
-//     [ test-2-1, test-2-2, test-2-3, test-2-4], 
-//     [ test-3-1, test-3-2, test-3-3, test-3-4], 
-//     [ test-4-1, test-4-2, test-4-3, test-4-4],   
-// ]
+// console.log(quizQuestions[1].question);
+// console.log(quizQuestions[1].answers[1]);
+
+// function viewScores() {
+    // quizArea.innerHTML = "";
+// };
 
 function clearArea() {
     quizArea.innerHTML = "";
-
 }
 
+// var interval = setInterval(function() {
+//     var time = 75;
+//     document.getElementById('timer').textContent = time;
+//     time--;
+//     startQuiz();
+//     if (time === 0) {
+//         clearInterval(interval);
+//         document.getElementById('timer').textContent = 'Done';
+//         alert("You have no time left.");
+//     }   
+// }, 1000);
+
 function startQuiz(event) {
+
+    
     clearArea();
-    console.log("should have cleared");
+    const userAnswers = [];
+    // console.log("should have cleared");
+
     var qText = document.createElement("h2");
     qText.className = "question";
-    qText.textContent = "TEST"
+    qText.textContent = quizQuestions[0].question;
+    
+    var answerList = document.createElement("div")
+    answerList.className ="answer-list"
 
     var qOption1 = document.createElement("button");
     var qOption2 = document.createElement("button");
+    var qOption3 = document.createElement("button");
+    var qOption4 = document.createElement("button");
+
+    qOption1.className = "answer"
+    qOption2.className = "answer"
+    qOption3.className = "answer"
+    qOption4.className = "answer"
+
+    qOption1.id = "answer-button"
+    qOption2.id = "answer-button"
+    qOption3.id = "answer-button"
+    qOption4.id = "answer-button"
+
+    qOption1.setAttribute("data-valid", "incorrect")
+    qOption2.setAttribute("data-valid", "correct")
+    qOption3.setAttribute("data-valid", "incorrect")
+    qOption4.setAttribute("data-valid", "incorrect")
+
+    qOption1.textContent = quizQuestions[0].answers[1];
+    qOption2.textContent = quizQuestions[0].answers[2];
+    qOption3.textContent = quizQuestions[0].answers[3];
+    qOption4.textContent = quizQuestions[0].answers[4];
 
     quizArea.appendChild(qText);
+    quizArea.appendChild(answerList);
     
+    answerList.appendChild(qOption1);
+    answerList.appendChild(qOption2);
+    answerList.appendChild(qOption3);
+    answerList.appendChild(qOption4);
+
+    var answerCheck = document.getElementById("answer-button").getAttribute("onclick");
+    console.log(answerCheck);
+
+    // var qHandler = (function() {
+    //     var i = 0;
+
+    //     return function() {
+
+    //     }
+    // })
+    // for (i = 0; i < quizQuestions.length; i++) {
+    //     console.log(quizQuestions[i].question);
+    //     qText.textContent = quizQuestions[i].question;
+
+    //     qOption1.textContent = quizQuestions[i].answers[0];
+    //     qOption2.textContent = quizQuestions[i].answers[1];
+    //     qOption3.textContent = quizQuestions[i].answers[2];
+    //     qOption4.textContent = quizQuestions[i].answers[3];
+    // }
+    
+   
+
+
+
 }
 
 startButton.addEventListener("click", startQuiz);
