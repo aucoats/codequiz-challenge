@@ -394,16 +394,13 @@ function savePlayer() {
     nameInput = document.querySelector("#name-input");
     var initials = nameInput.value;
 
-    console.log(initials);
-    console.log(score);
-
     playerScores.push(initials);
     playerScores.push(score);
 
     console.log(playerScores);
 
 
-    // localStorage.setItem("scores", playerScores);
+    // localStorage.setItem("playerScores", playerScores);
 }
 
 // function loadPlayers() {
