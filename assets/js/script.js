@@ -5,6 +5,9 @@
         click button to advance quiz
         */
 
+        // NEED TO STYLE ENTER HIGH SCORES PAGE & HIGH SCORES LIST
+        // NEED TO ADD HIGH SCORES LIST
+
 
         // use jquery? 
 
@@ -58,14 +61,7 @@ var quizQuestions = [
     }
 ]
 
-
-// function answerCheck(event) {
-//     clearArea();
-//     startQuiz();
-// }
-// function pointHandler() {
-
-// }
+var playerScores = []
 
 // function viewScores() {
     // quizArea.innerHTML = "";
@@ -367,20 +363,55 @@ function answerCheckFour() {
         time = time - 10;
     };
     clearInterval(interval);
+    enterHighscores();
 }
 
 function enterHighscores() {
+    document.querySelector("#timer").textContent = "Done!"
     clearArea();
-
+    var score = time;
 
     var timeScore = document.createElement("h2");
-    timeScore.textContent = "Your score is " + time + ". Enter initials below to save your score";
+    timeScore.textContent = "Your score is " + score + ". Enter initials below to save your score";
     quizArea.appendChild(timeScore);
 
     var nameInput = document.createElement("input");
-    nameInput.textContent = "Enter initials."
+    nameInput.placeholder = "Enter initials here."
+    nameInput.id = "name-input"
     quizArea.appendChild(nameInput);
+
+    var saveScore = document.createElement("button");
+    saveScore.className = "button"
+    saveScore.id = "save-button"
+    saveScore.textContent = "Save your score!"
+    saveScore.setAttribute("onclick", "savePlayer()");
+    quizArea.appendChild(saveScore);
 }
+
+function savePlayer() {
+    var score = time;
+
+    nameInput = document.querySelector("#name-input");
+    var initials = nameInput.value;
+
+    console.log(initials);
+    console.log(score);
+
+    playerScores.push(initials);
+    playerScores.push(score);
+
+    console.log(playerScores);
+
+
+    // localStorage.setItem("scores", playerScores);
+}
+
+// function loadPlayers() {
+//     for (var i = 0; i < savedTasks.length; i++) {
+//         // pass each task object into the `createTaskEl()` function
+//         createTaskEl(savedTasks[i]);
+//       }
+// }
 
 
 startButton.addEventListener("click", startQuiz);
