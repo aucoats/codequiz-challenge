@@ -6,9 +6,14 @@
         */
 
 
+        // use jquery? 
+
 var quizArea = document.querySelector("#quiz-area");
 var startButton = document.querySelector("#start");
+var answerButton = document.querySelector("#answer-button");
 var time = 75;
+
+// global "turns" variable for iterating through questions and then populates on next click?
 
 const quizQuestions = [
     {
@@ -65,6 +70,7 @@ function clearArea() {
 }
 
 // var interval = setInterval(function() {
+        
 //     var time = 75;
 //     document.getElementById('timer').textContent = time;
 //     time--;
@@ -73,6 +79,7 @@ function clearArea() {
 //         clearInterval(interval);
 //         document.getElementById('timer').textContent = 'Done';
 //         alert("You have no time left.");
+            // viewScores();
 //     }   
 // }, 1000);
 
@@ -85,7 +92,7 @@ function startQuiz(event) {
 
     var qText = document.createElement("h2");
     qText.className = "question";
-    qText.textContent = quizQuestions[0].question;
+    // qText.textContent = quizQuestions[0].question;
     
     var answerList = document.createElement("div")
     answerList.className ="answer-list"
@@ -123,8 +130,12 @@ function startQuiz(event) {
     answerList.appendChild(qOption3);
     answerList.appendChild(qOption4);
 
-    var answerCheck = document.getElementById("answer-button").getAttribute("onclick");
-    console.log(answerCheck);
+    // var answerCheck = document.querySelector("button").onclick;
+    // console.log(answerCheck);
+
+    
+
+    // event.target?
 
     // var qHandler = (function() {
     //     var i = 0;
@@ -137,16 +148,30 @@ function startQuiz(event) {
     //     console.log(quizQuestions[i].question);
     //     qText.textContent = quizQuestions[i].question;
 
-    //     qOption1.textContent = quizQuestions[i].answers[0];
-    //     qOption2.textContent = quizQuestions[i].answers[1];
-    //     qOption3.textContent = quizQuestions[i].answers[2];
-    //     qOption4.textContent = quizQuestions[i].answers[3];
+    //     var answerList = document.createElement("div")
+    //     answerList.className ="answer-list"
+
+    //     qOption1.textContent = quizQuestions[i].answers[1];
+    //     qOption2.textContent = quizQuestions[i].answers[2];
+    //     qOption3.textContent = quizQuestions[i].answers[3];
+    //     qOption4.textContent = quizQuestions[i].answers[4];
+        
+
     // }
+
+
     
-   
+    // while (answerButton = not clicked = true)
+    //          populate
+    //     for loop
 
 
 
 }
 
+// function pointHandler() {
+
+// }
+
+// document.querySelector("button").addEventListener("click", pointHander);
 startButton.addEventListener("click", startQuiz);
