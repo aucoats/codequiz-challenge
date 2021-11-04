@@ -58,7 +58,10 @@ var quizQuestions = [
     }
 ]
 
-
+// function answerCheck(event) {
+//     clearArea();
+//     startQuiz();
+// }
 // function pointHandler() {
 
 // }
@@ -71,18 +74,17 @@ function clearArea() {
     quizArea.innerHTML = "";
 }
 
-// var interval = setInterval(function() {
+var interval = setInterval(function() {
         
-//     document.getElementById('timer').textContent = time;
-//     time--;
-//     startQuiz();
-//     if (time === 0) {
-//         clearInterval(interval);
-//         document.getElementById('timer').textContent = 'Done';
-//         alert("You have no time left.");
-            // viewScores();
-//     }   
-// }, 1000);
+    document.getElementById('timer').textContent = time;
+    time--;
+    if (time === 0) {
+        clearInterval(interval);
+        document.getElementById('timer').textContent = 'Done';
+        alert("You have no time left.");
+        enterHighscores();
+    }   
+}, 1000);
 
 function startQuiz(event) {
     
@@ -337,17 +339,18 @@ function lastQuestion() {
 }
 
 function enterHighscores() {
-
-}
-// function answerCheck(event) {
-//     clearArea();
-//     startQuiz();
-// }
-
-
-
-
+    clearArea();
     
+
+    var timeScore = document.createElement("h2");
+    timeScore.textContent = "Your score is " + time + ". Enter initials below to save your score";
+    quizArea.appendChild(timeScore);
+
+    var nameInput = document.createElement("input");
+    nameInput.textContent = "Enter initials."
+    quizArea.appendChild(nameInput);
+}
+
 
 startButton.addEventListener("click", startQuiz);
 
