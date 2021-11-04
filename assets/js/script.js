@@ -58,6 +58,7 @@ var quizQuestions = [
     }
 ]
 
+
 // function answerCheck(event) {
 //     clearArea();
 //     startQuiz();
@@ -86,7 +87,7 @@ var interval = setInterval(function() {
     }   
 }, 1000);
 
-function startQuiz(event) {
+function startQuiz() {
     
     clearArea();
     
@@ -118,10 +119,10 @@ function startQuiz(event) {
     qOption4.setAttribute("data-valid", "incorrect")
     
 
-    qOption1.setAttribute("onclick", "nextQuestion()");
-    qOption2.setAttribute("onclick", "nextQuestion()");
-    qOption3.setAttribute("onclick", "nextQuestion()");
-    qOption4.setAttribute("onclick", "nextQuestion()");
+    qOption1.setAttribute("onclick", "answerCheckOne()");
+    qOption2.setAttribute("onclick", "answerCheckOne()");
+    qOption3.setAttribute("onclick", "answerCheckOne()");
+    qOption4.setAttribute("onclick", "answerCheckOne()");
     
 
     qOption1.textContent = quizQuestions[0].answers[1];
@@ -139,6 +140,8 @@ function startQuiz(event) {
 
 
     quizQuestions.shift();
+
+    
 
     // var answerButton = document.getElementById("#answer-button");
     // answerButton.onclick = function() {console.log("please")};
@@ -176,7 +179,7 @@ function startQuiz(event) {
 
 }
 
-function nextQuestion(event) {
+function nextQuestion() {
     
     clearArea();
     
@@ -207,10 +210,10 @@ function nextQuestion(event) {
     qOption3.setAttribute("data-valid", "incorrect")
     qOption4.setAttribute("data-valid", "correct")
 
-    qOption1.setAttribute("onclick", "thirdQuestion()");
-    qOption2.setAttribute("onclick", "thirdQuestion()");
-    qOption3.setAttribute("onclick", "thirdQuestion()");
-    qOption4.setAttribute("onclick", "thirdQuestion()");
+    qOption1.setAttribute("onclick", "answerCheckTwo()");
+    qOption2.setAttribute("onclick", "answerCheckTwo()");
+    qOption3.setAttribute("onclick", "answerCheckTwo()");
+    qOption4.setAttribute("onclick", "answerCheckTwo()");
     
 
     qOption1.textContent = quizQuestions[0].answers[1];
@@ -261,10 +264,10 @@ function thirdQuestion() {
     qOption3.setAttribute("data-valid", "incorrect")
     qOption4.setAttribute("data-valid", "incorrect")
 
-    qOption1.setAttribute("onclick", "lastQuestion()");
-    qOption2.setAttribute("onclick", "lastQuestion()");
-    qOption3.setAttribute("onclick", "lastQuestion()");
-    qOption4.setAttribute("onclick", "lastQuestion()");
+    qOption1.setAttribute("onclick", "answerCheckThree()");
+    qOption2.setAttribute("onclick", "answerCheckThree()");
+    qOption3.setAttribute("onclick", "answerCheckThree()");
+    qOption4.setAttribute("onclick", "answerCheckThree()");
     
 
     qOption1.textContent = quizQuestions[0].answers[1];
@@ -315,10 +318,10 @@ function lastQuestion() {
     qOption3.setAttribute("data-valid", "incorrect")
     qOption4.setAttribute("data-valid", "incorrect")
 
-    qOption1.setAttribute("onclick", "enterHighscores()");
-    qOption2.setAttribute("onclick", "enterHighscores()");
-    qOption3.setAttribute("onclick", "enterHighscores()");
-    qOption4.setAttribute("onclick", "enterHighscores()");
+    qOption1.setAttribute("onclick", "answerCheckFour()");
+    qOption2.setAttribute("onclick", "answerCheckFour()");
+    qOption3.setAttribute("onclick", "answerCheckFour()");
+    qOption4.setAttribute("onclick", "answerCheckFour()");
     
 
     qOption1.textContent = quizQuestions[0].answers[1];
@@ -338,9 +341,37 @@ function lastQuestion() {
     quizQuestions.shift();
 }
 
+function answerCheckOne() {
+    nextQuestion();
+    if (event.target.getAttribute("data-valid") == "incorrect") {
+        time = time - 10;
+    };
+}
+
+function answerCheckTwo() {
+    thirdQuestion();
+    if (event.target.getAttribute("data-valid") == "incorrect") {
+        time = time - 10;
+    };
+}
+
+function answerCheckThree() {
+    lastQuestion(); 
+    if (event.target.getAttribute("data-valid") == "incorrect") {
+        time = time - 10;
+    };
+}
+
+function answerCheckFour() {
+    if (event.target.getAttribute("data-valid") == "incorrect") {
+        time = time - 10;
+    };
+    clearInterval(interval);
+}
+
 function enterHighscores() {
     clearArea();
-    
+
 
     var timeScore = document.createElement("h2");
     timeScore.textContent = "Your score is " + time + ". Enter initials below to save your score";
@@ -353,6 +384,13 @@ function enterHighscores() {
 
 
 startButton.addEventListener("click", startQuiz);
+
+// var answerButton = document.querySelector("#answer-button");
+
+//     answerButton.querySelector() = function() {
+//     console.log("pleasegodsofj;ekplese");
+// }
+
 
 
 // event.target?
