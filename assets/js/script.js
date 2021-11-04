@@ -10,12 +10,12 @@
 
 var quizArea = document.querySelector("#quiz-area");
 var startButton = document.querySelector("#start");
-var answerButton = document.querySelector("#answer-button");
 var time = 75;
+
 
 // global "turns" variable for iterating through questions and then populates on next click?
 
-const quizQuestions = [
+var quizQuestions = [
     {
         question: "Test",
         answers: {
@@ -58,8 +58,10 @@ const quizQuestions = [
     }
 ]
 
-// console.log(quizQuestions[1].question);
-// console.log(quizQuestions[1].answers[1]);
+
+// function pointHandler() {
+
+// }
 
 // function viewScores() {
     // quizArea.innerHTML = "";
@@ -71,7 +73,6 @@ function clearArea() {
 
 // var interval = setInterval(function() {
         
-//     var time = 75;
 //     document.getElementById('timer').textContent = time;
 //     time--;
 //     startQuiz();
@@ -84,15 +85,156 @@ function clearArea() {
 // }, 1000);
 
 function startQuiz(event) {
-
     
     clearArea();
-    const userAnswers = [];
-    // console.log("should have cleared");
-
+    
     var qText = document.createElement("h2");
     qText.className = "question";
-    // qText.textContent = quizQuestions[0].question;
+    qText.textContent = quizQuestions[0].question;
+    
+    var answerList = document.createElement("div")
+    answerList.className ="answer-list"
+
+    var qOption1 = document.createElement("button");
+    var qOption2 = document.createElement("button");
+    var qOption3 = document.createElement("button");
+    var qOption4 = document.createElement("button");
+
+    qOption1.className = "answer"
+    qOption2.className = "answer"
+    qOption3.className = "answer"
+    qOption4.className = "answer"
+
+    qOption1.id = "answer-button"
+    qOption2.id = "answer-button"
+    qOption3.id = "answer-button"
+    qOption4.id = "answer-button"
+
+    qOption1.setAttribute("data-valid", "incorrect")
+    qOption2.setAttribute("data-valid", "correct")
+    qOption3.setAttribute("data-valid", "incorrect")
+    qOption4.setAttribute("data-valid", "incorrect")
+    
+
+    qOption1.setAttribute("onclick", "nextQuestion()");
+    qOption2.setAttribute("onclick", "nextQuestion()");
+    qOption3.setAttribute("onclick", "nextQuestion()");
+    qOption4.setAttribute("onclick", "nextQuestion()");
+    
+
+    qOption1.textContent = quizQuestions[0].answers[1];
+    qOption2.textContent = quizQuestions[0].answers[2];
+    qOption3.textContent = quizQuestions[0].answers[3];
+    qOption4.textContent = quizQuestions[0].answers[4];
+
+    quizArea.appendChild(qText);
+    quizArea.appendChild(answerList);
+    
+    answerList.appendChild(qOption1);
+    answerList.appendChild(qOption2);
+    answerList.appendChild(qOption3);
+    answerList.appendChild(qOption4);
+
+
+    quizQuestions.shift();
+
+    // var answerButton = document.getElementById("#answer-button");
+    // answerButton.onclick = function() {console.log("please")};
+    // function {
+    //     if (event.target.getAttribute("data-valid") = "correct") {
+
+    //     }
+
+    // })
+    
+    // var answerCheck = document.querySelector("button").onclick;
+    // console.log(answerCheck);
+
+     // if (iterations = 0) {
+    //     qOption1.setAttribute("data-valid", "incorrect")
+    //     qOption2.setAttribute("data-valid", "correct")
+    //     qOption3.setAttribute("data-valid", "incorrect")
+    //     qOption4.setAttribute("data-valid", "incorrect")
+    // } else if (iterations = 1) {
+    //     qOption1.setAttribute("data-valid", "incorrect")
+    //     qOption2.setAttribute("data-valid", "incorrect")
+    //     qOption3.setAttribute("data-valid", "incorrect")
+    //     qOption4.setAttribute("data-valid", "correct")
+    // } else if (iterations = 2) {
+    //     qOption1.setAttribute("data-valid", "incorrect")
+    //     qOption2.setAttribute("data-valid", "correct")
+    //     qOption3.setAttribute("data-valid", "incorrect")
+    //     qOption4.setAttribute("data-valid", "incorrect")
+    // } else if (iterations = 4) {
+    //     qOption1.setAttribute("data-valid", "correct")
+    //     qOption2.setAttribute("data-valid", "incorrect")
+    //     qOption3.setAttribute("data-valid", "incorrect")
+    //     qOption4.setAttribute("data-valid", "incorrect")
+    // }
+
+}
+
+function nextQuestion(event) {
+    
+    clearArea();
+    
+    var qText = document.createElement("h2");
+    qText.className = "question";
+    qText.textContent = quizQuestions[0].question;
+    
+    var answerList = document.createElement("div")
+    answerList.className ="answer-list"
+
+    var qOption1 = document.createElement("button");
+    var qOption2 = document.createElement("button");
+    var qOption3 = document.createElement("button");
+    var qOption4 = document.createElement("button");
+
+    qOption1.className = "answer"
+    qOption2.className = "answer"
+    qOption3.className = "answer"
+    qOption4.className = "answer"
+
+    qOption1.id = "answer-button"
+    qOption2.id = "answer-button"
+    qOption3.id = "answer-button"
+    qOption4.id = "answer-button"
+
+    qOption1.setAttribute("data-valid", "incorrect")
+    qOption2.setAttribute("data-valid", "incorrect")
+    qOption3.setAttribute("data-valid", "incorrect")
+    qOption4.setAttribute("data-valid", "correct")
+
+    qOption1.setAttribute("onclick", "thirdQuestion()");
+    qOption2.setAttribute("onclick", "thirdQuestion()");
+    qOption3.setAttribute("onclick", "thirdQuestion()");
+    qOption4.setAttribute("onclick", "thirdQuestion()");
+    
+
+    qOption1.textContent = quizQuestions[0].answers[1];
+    qOption2.textContent = quizQuestions[0].answers[2];
+    qOption3.textContent = quizQuestions[0].answers[3];
+    qOption4.textContent = quizQuestions[0].answers[4];
+
+    quizArea.appendChild(qText);
+    quizArea.appendChild(answerList);
+    
+    answerList.appendChild(qOption1);
+    answerList.appendChild(qOption2);
+    answerList.appendChild(qOption3);
+    answerList.appendChild(qOption4);
+
+
+    quizQuestions.shift();
+}
+
+function thirdQuestion() {
+
+    clearArea();
+    
+    var qText = document.createElement("h2");
+    qText.className = "question";
+    qText.textContent = quizQuestions[0].question;
     
     var answerList = document.createElement("div")
     answerList.className ="answer-list"
@@ -117,6 +259,12 @@ function startQuiz(event) {
     qOption3.setAttribute("data-valid", "incorrect")
     qOption4.setAttribute("data-valid", "incorrect")
 
+    qOption1.setAttribute("onclick", "lastQuestion()");
+    qOption2.setAttribute("onclick", "lastQuestion()");
+    qOption3.setAttribute("onclick", "lastQuestion()");
+    qOption4.setAttribute("onclick", "lastQuestion()");
+    
+
     qOption1.textContent = quizQuestions[0].answers[1];
     qOption2.textContent = quizQuestions[0].answers[2];
     qOption3.textContent = quizQuestions[0].answers[3];
@@ -130,12 +278,81 @@ function startQuiz(event) {
     answerList.appendChild(qOption3);
     answerList.appendChild(qOption4);
 
-    // var answerCheck = document.querySelector("button").onclick;
-    // console.log(answerCheck);
+
+    quizQuestions.shift();
+
+}
+
+function lastQuestion() {
+    clearArea();
+    
+    var qText = document.createElement("h2");
+    qText.className = "question";
+    qText.textContent = quizQuestions[0].question;
+    
+    var answerList = document.createElement("div")
+    answerList.className ="answer-list"
+
+    var qOption1 = document.createElement("button");
+    var qOption2 = document.createElement("button");
+    var qOption3 = document.createElement("button");
+    var qOption4 = document.createElement("button");
+
+    qOption1.className = "answer"
+    qOption2.className = "answer"
+    qOption3.className = "answer"
+    qOption4.className = "answer"
+
+    qOption1.id = "answer-button"
+    qOption2.id = "answer-button"
+    qOption3.id = "answer-button"
+    qOption4.id = "answer-button"
+
+    qOption1.setAttribute("data-valid", "correct")
+    qOption2.setAttribute("data-valid", "incorrect")
+    qOption3.setAttribute("data-valid", "incorrect")
+    qOption4.setAttribute("data-valid", "incorrect")
+
+    qOption1.setAttribute("onclick", "enterHighscores()");
+    qOption2.setAttribute("onclick", "enterHighscores()");
+    qOption3.setAttribute("onclick", "enterHighscores()");
+    qOption4.setAttribute("onclick", "enterHighscores()");
+    
+
+    qOption1.textContent = quizQuestions[0].answers[1];
+    qOption2.textContent = quizQuestions[0].answers[2];
+    qOption3.textContent = quizQuestions[0].answers[3];
+    qOption4.textContent = quizQuestions[0].answers[4];
+
+    quizArea.appendChild(qText);
+    quizArea.appendChild(answerList);
+    
+    answerList.appendChild(qOption1);
+    answerList.appendChild(qOption2);
+    answerList.appendChild(qOption3);
+    answerList.appendChild(qOption4);
+
+
+    quizQuestions.shift();
+}
+
+function enterHighscores() {
+
+}
+// function answerCheck(event) {
+//     clearArea();
+//     startQuiz();
+// }
+
+
+
 
     
 
-    // event.target?
+startButton.addEventListener("click", startQuiz);
+
+
+// event.target?
 
     // var qHandler = (function() {
     //     var i = 0;
@@ -158,20 +375,3 @@ function startQuiz(event) {
         
 
     // }
-
-
-    
-    // while (answerButton = not clicked = true)
-    //          populate
-    //     for loop
-
-
-
-}
-
-// function pointHandler() {
-
-// }
-
-// document.querySelector("button").addEventListener("click", pointHander);
-startButton.addEventListener("click", startQuiz);
