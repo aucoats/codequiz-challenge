@@ -1,5 +1,4 @@
-       // NEED TO STYLE ENTER HIGH SCORES PAGE & HIGH SCORES LIST
-        // NEED TO ADD HIGH SCORES LIST
+    // Can get click event to start timer or timer to clear on high score list, not both
 
 
 var quizArea = document.querySelector("#quiz-area");
@@ -7,6 +6,7 @@ var startButton = document.querySelector("#start");
 var viewHighscores = document.querySelector("#view-high-scores");
 var time = 75;
 
+var interval = setInterval(time);
 
 var quizQuestions = [
     {
@@ -50,14 +50,9 @@ var quizQuestions = [
 var playerNames = []
 var pastScores = []
 
-// while (!startButton.clicked) {
-//     !time;
-// }
-// if (startButton.clicked) {
-//     time = 75;
-// }
 
-var interval = setInterval(function() {
+startButton.addEventListener("click", function() {
+    var interval = setInterval(function() {
         
     document.getElementById('timer').textContent = "Time: " + time;
     time--;
@@ -67,29 +62,16 @@ var interval = setInterval(function() {
         alert("You have no time left.");
         enterHighscores();
     }   
+    // if (document.querySelector("#highscorealert")) {
+    //     clearInterval(interval);
+    // }
 }, 1000);
+});
 
-
-
-// function viewScores() {
-    // quizArea.innerHTML = "";
-// };
 
 function clearArea() {
     quizArea.innerHTML = "";
 }
-
-var interval = setInterval(function() {
-        
-    document.getElementById('timer').textContent = time;
-    time--;
-    if (time === 0) {
-        clearInterval(interval);
-        document.getElementById('timer').textContent = 'Done.';
-        alert("You have no time left.");
-        enterHighscores();
-    }   
-}, 1000);
 
 function startQuiz() {
     
@@ -312,6 +294,16 @@ function answerCheckOne() {
     if (event.target.getAttribute("data-valid") == "incorrect") {
         
         time = time - 10;
+
+        var checkAlert = document.createElement("h3");
+        checkAlert.textContent = "Wrong!"
+        checkAlert.className = "alert"
+        quizArea.appendChild(checkAlert);
+    } else {
+        var alert = document.createElement("h3");
+        alert.textContent = "Correct!"
+        alert.className = "alert"
+        quizArea.appendChild(alert);
     };
     nextQuestion();
 }
@@ -319,6 +311,16 @@ function answerCheckOne() {
 function answerCheckTwo() {
     if (event.target.getAttribute("data-valid") == "incorrect") {
         time = time - 10;
+
+        var alert = document.createElement("h3");
+        alert.textContent = "Wrong!"
+        alert.className = "alert"
+        quizArea.appendChild(alert);
+    } else {
+        var alert = document.createElement("h3");
+        alert.textContent = "Correct!"
+        alert.className = "alert"
+        quizArea.appendChild(alert);
     };
     thirdQuestion();
 }
@@ -326,6 +328,15 @@ function answerCheckTwo() {
 function answerCheckThree() {
     if (event.target.getAttribute("data-valid") == "incorrect") {
         time = time - 10;
+        var alert = document.createElement("h3");
+        alert.textContent = "Wrong!"
+        alert.className = "alert"
+        quizArea.appendChild(alert);
+    } else {
+        var alert = document.createElement("h3");
+        alert.textContent = "Correct!"
+        alert.className = "alert"
+        quizArea.appendChild(alert);
     };
     lastQuestion(); 
 }
@@ -333,18 +344,28 @@ function answerCheckThree() {
 function answerCheckFour() {
     if (event.target.getAttribute("data-valid") == "incorrect") {
         time = time - 10;
+        var alert = document.createElement("h3");
+        alert.textContent = "Wrong!"
+        alert.className = "alert"
+        quizArea.appendChild(alert);
+    } else {
+        var alert = document.createElement("h3");
+        alert.textContent = "Correct!"
+        alert.className = "alert"
+        quizArea.appendChild(alert);
     };
-    clearInterval(interval);
+    // clearInterval(interval);
     enterHighscores();
 }
 
 function enterHighscores() {
-    clearInterval(interval);
+    clearInterval(time);
     document.querySelector("#timer").textContent = "Done!"
     clearArea();
     var score = time;
 
     var timeScore = document.createElement("h2");
+    timeScore.id = "high-score-alert"
     timeScore.textContent = "Your score is " + score + ". Enter initials below to save your score";
     quizArea.appendChild(timeScore);
 
@@ -414,6 +435,12 @@ function loadPlayers() {
         
    }
 
+   var reloadButton = document.createElement("button");
+   reloadButton.className = "reload-button"
+   reloadButton.textContent = "Go Back"
+   reloadButton.setAttribute("onclick", "goBack()")
+
+   quizArea.appendChild(reloadButton);
    
 }
 
@@ -422,6 +449,9 @@ function dataHandler() {
     loadPlayers();
 }
 
+function goBack() {
+    window.location.reload();
+}
 
 
 // function startHandler() {
