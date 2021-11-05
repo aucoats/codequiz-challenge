@@ -27,7 +27,6 @@ var quizQuestions = [
             3: "test",
             4: "test",
         },
-        correctAnswer: "2"
     },
     {
         question: "Tes2t",
@@ -37,7 +36,6 @@ var quizQuestions = [
             3: "test",
             4: "test",
         },
-        correctAnswer: "4"
     },
     {
         question: "Tes3t",
@@ -47,7 +45,6 @@ var quizQuestions = [
             3: "test",
             4: "test",
         },
-        correctAnswer: "2"
     },
     {
         question: "Tes4t",
@@ -57,11 +54,23 @@ var quizQuestions = [
             3: "test",
             4: "test",
         },
-        correctAnswer: "1"
     }
 ]
 
-var playerScores = []
+var playerNames = []
+var pastScores = []
+// var playerScores = [
+//     {
+//         playerNames: {
+
+//         },
+//         pastScores: {
+
+//         }
+//     }
+// ]
+
+
 
 // function viewScores() {
     // quizArea.innerHTML = "";
@@ -384,31 +393,69 @@ function enterHighscores() {
     saveScore.className = "button"
     saveScore.id = "save-button"
     saveScore.textContent = "Save your score!"
-    saveScore.setAttribute("onclick", "savePlayer()");
+    saveScore.setAttribute("onclick", "dataHandler()");
     quizArea.appendChild(saveScore);
 }
 
 function savePlayer() {
+    var playerNames = localStorage.getItem("playerNames");
+    var pastScores = localStorage.getItem("pastScores");
+
+    playerNames = JSON.parse(playerNames);
+    pastScores = JSON.parse(pastScores);
+    
     var score = time;
 
     nameInput = document.querySelector("#name-input");
     var initials = nameInput.value;
 
-    playerScores.push(initials);
-    playerScores.push(score);
+    playerNames.push(initials);
+    pastScores.push(score);
 
-    console.log(playerScores);
+    console.log(playerNames);
+    console.log(pastScores);
 
-
-    // localStorage.setItem("playerScores", playerScores);
+    localStorage.setItem("playerNames", JSON.stringify(playerNames));
+    localStorage.setItem("pastScores", JSON.stringify(pastScores));
 }
 
-// function loadPlayers() {
-//     for (var i = 0; i < savedTasks.length; i++) {
-//         // pass each task object into the `createTaskEl()` function
-//         createTaskEl(savedTasks[i]);
-//       }
-// }
+function loadPlayers() {
+    clearArea();
+    var scoreTitle = document.createElement("h2");
+    scoreTitle.textContent = "High scores!"
+    quizArea.appendChild(scoreTitle);
+
+    var playerList = document.createElement("ul");
+    playerList.className = "player-list"
+    quizArea.appendChild(playerList);
+
+    var playerNames = localStorage.getItem("playerNames");
+    var pastScores = localStorage.getItem("pastScores");
+
+    playerNames = JSON.parse(playerNames);
+    pastScores = JSON.parse(pastScores);
+
+    for (var i = 0; i < playerNames.length; i++) {
+        createList(playerNames[i]); 
+      }
+
+   function createList() {
+        var playerItem = document.createElement("li")
+        playerItem.className = "player-list-item";
+        playerItem.textContent = playerNames[i] + " - " + pastScores[i];  
+        playerList.appendChild(playerItem);
+        
+   }
+
+   
+}
+
+function dataHandler() { 
+    savePlayer();
+    loadPlayers();
+}
+
+
 
 
 startButton.addEventListener("click", startQuiz);
