@@ -1,74 +1,73 @@
-/* start quiz, 
-    start timer,
-        reduce time by 10s on an incorrect answer
-    populate quiz, 
-        click button to advance quiz
-        */
-
-        // NEED TO STYLE ENTER HIGH SCORES PAGE & HIGH SCORES LIST
+       // NEED TO STYLE ENTER HIGH SCORES PAGE & HIGH SCORES LIST
         // NEED TO ADD HIGH SCORES LIST
 
 
-        // use jquery? 
-
 var quizArea = document.querySelector("#quiz-area");
 var startButton = document.querySelector("#start");
+var viewHighscores = document.querySelector("#view-high-scores");
 var time = 75;
 
 
-// global "turns" variable for iterating through questions and then populates on next click?
-
 var quizQuestions = [
     {
-        question: "Test",
+        question: "Which HTML element holds our Javascript?",
         answers: {
-            1: "test",
-            2: "test",
-            3: "test",
-            4: "test",
+            1: "<scripting>",
+            2: "<script>",
+            3: "<js>",
+            4: "<javascript>",
         },
     },
     {
-        question: "Tes2t",
+        question: "How would we select a <p> element with an ID of 'hello'?",
         answers: {
-            1: "test",
-            2: "test",
-            3: "test",
-            4: "test",
+            1: "document.getElementByName('p')",
+            2: "p.getID('name')",
+            3: "document.getPbyId('hello')",
+            4: "document.getElementById('hello')",
         },
     },
     {
-        question: "Tes3t",
+        question: "How would you write 'Hello World' in an alert box?",
         answers: {
-            1: "test",
-            2: "test",
-            3: "test",
-            4: "test",
+            1: "msg('Hello World');",
+            2: "alert('Hello World');",
+            3: "popup('Hello World');",
+            4: "function () { msg('Hello World') };",
         },
     },
     {
-        question: "Tes4t",
+        question: "The DOM allows Javascript to interact with HTMl as an _____.",
         answers: {
-            1: "test",
-            2: "test",
-            3: "test",
-            4: "test",
+            1: "object",
+            2: "array",
+            3: "script",
+            4: "function",
         },
     }
 ]
 
 var playerNames = []
 var pastScores = []
-// var playerScores = [
-//     {
-//         playerNames: {
 
-//         },
-//         pastScores: {
+// while (!startButton.clicked) {
+//     !time;
+// }
+// if (startButton.clicked) {
+//     time = 75;
+// }
 
-//         }
-//     }
-// ]
+var interval = setInterval(function() {
+        
+    document.getElementById('timer').textContent = "Time: " + time;
+    time--;
+    if (time === 0) {
+        clearInterval(interval);
+        document.getElementById('timer').textContent = 'Done.';
+        alert("You have no time left.");
+        enterHighscores();
+    }   
+}, 1000);
 
 
 
@@ -86,7 +85,7 @@ var interval = setInterval(function() {
     time--;
     if (time === 0) {
         clearInterval(interval);
-        document.getElementById('timer').textContent = 'Done';
+        document.getElementById('timer').textContent = 'Done.';
         alert("You have no time left.");
         enterHighscores();
     }   
@@ -145,43 +144,6 @@ function startQuiz() {
 
 
     quizQuestions.shift();
-
-    
-
-    // var answerButton = document.getElementById("#answer-button");
-    // answerButton.onclick = function() {console.log("please")};
-    // function {
-    //     if (event.target.getAttribute("data-valid") = "correct") {
-
-    //     }
-
-    // })
-    
-    // var answerCheck = document.querySelector("button").onclick;
-    // console.log(answerCheck);
-
-     // if (iterations = 0) {
-    //     qOption1.setAttribute("data-valid", "incorrect")
-    //     qOption2.setAttribute("data-valid", "correct")
-    //     qOption3.setAttribute("data-valid", "incorrect")
-    //     qOption4.setAttribute("data-valid", "incorrect")
-    // } else if (iterations = 1) {
-    //     qOption1.setAttribute("data-valid", "incorrect")
-    //     qOption2.setAttribute("data-valid", "incorrect")
-    //     qOption3.setAttribute("data-valid", "incorrect")
-    //     qOption4.setAttribute("data-valid", "correct")
-    // } else if (iterations = 2) {
-    //     qOption1.setAttribute("data-valid", "incorrect")
-    //     qOption2.setAttribute("data-valid", "correct")
-    //     qOption3.setAttribute("data-valid", "incorrect")
-    //     qOption4.setAttribute("data-valid", "incorrect")
-    // } else if (iterations = 4) {
-    //     qOption1.setAttribute("data-valid", "correct")
-    //     qOption2.setAttribute("data-valid", "incorrect")
-    //     qOption3.setAttribute("data-valid", "incorrect")
-    //     qOption4.setAttribute("data-valid", "incorrect")
-    // }
-
 }
 
 function nextQuestion() {
@@ -347,24 +309,25 @@ function lastQuestion() {
 }
 
 function answerCheckOne() {
-    nextQuestion();
     if (event.target.getAttribute("data-valid") == "incorrect") {
+        
         time = time - 10;
     };
+    nextQuestion();
 }
 
 function answerCheckTwo() {
-    thirdQuestion();
     if (event.target.getAttribute("data-valid") == "incorrect") {
         time = time - 10;
     };
+    thirdQuestion();
 }
 
 function answerCheckThree() {
-    lastQuestion(); 
     if (event.target.getAttribute("data-valid") == "incorrect") {
         time = time - 10;
     };
+    lastQuestion(); 
 }
 
 function answerCheckFour() {
@@ -376,6 +339,7 @@ function answerCheckFour() {
 }
 
 function enterHighscores() {
+    clearInterval(interval);
     document.querySelector("#timer").textContent = "Done!"
     clearArea();
     var score = time;
@@ -387,12 +351,14 @@ function enterHighscores() {
     var nameInput = document.createElement("input");
     nameInput.placeholder = "Enter initials here."
     nameInput.id = "name-input"
+    nameInput.className = "name-input"
     quizArea.appendChild(nameInput);
 
     var saveScore = document.createElement("button");
-    saveScore.className = "button"
+    saveScore.className = "submit-button"
     saveScore.id = "save-button"
     saveScore.textContent = "Save your score!"
+    saveScore.setAttribute("type", "submit");
     saveScore.setAttribute("onclick", "dataHandler()");
     quizArea.appendChild(saveScore);
 }
@@ -420,6 +386,7 @@ function savePlayer() {
 }
 
 function loadPlayers() {
+    clearInterval(interval);
     clearArea();
     var scoreTitle = document.createElement("h2");
     scoreTitle.textContent = "High scores!"
@@ -457,37 +424,14 @@ function dataHandler() {
 
 
 
-
-startButton.addEventListener("click", startQuiz);
-
-// var answerButton = document.querySelector("#answer-button");
-
-//     answerButton.querySelector() = function() {
-//     console.log("pleasegodsofj;ekplese");
+// function startHandler() {
+    
+//     startQuiz();
 // }
 
 
 
-// event.target?
+viewHighscores.addEventListener("click", loadPlayers);
+startButton.addEventListener("click", startQuiz);
 
-    // var qHandler = (function() {
-    //     var i = 0;
 
-    //     return function() {
-
-    //     }
-    // })
-    // for (i = 0; i < quizQuestions.length; i++) {
-    //     console.log(quizQuestions[i].question);
-    //     qText.textContent = quizQuestions[i].question;
-
-    //     var answerList = document.createElement("div")
-    //     answerList.className ="answer-list"
-
-    //     qOption1.textContent = quizQuestions[i].answers[1];
-    //     qOption2.textContent = quizQuestions[i].answers[2];
-    //     qOption3.textContent = quizQuestions[i].answers[3];
-    //     qOption4.textContent = quizQuestions[i].answers[4];
-        
-
-    // }

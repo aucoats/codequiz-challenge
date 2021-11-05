@@ -3,12 +3,11 @@
     box-sizing: border-box;
 }
 
-
 body {
     text-align: center;
 }
 
-
+/* header styles */
 header {
     margin: auto 0;
     padding: 50px;
@@ -29,6 +28,17 @@ p {
     padding: 20px 40px;
 }
 
+/* hover effect on buttons */
+button:hover {
+    background-color:lightpink;
+}
+
+/* high score link style */
+.high-scores {
+    color: lightpink;
+}
+
+/* start button style */
 .start {
     font-size: 20px;
     color: white;
@@ -39,6 +49,7 @@ p {
     border-radius: 15px;
 }
 
+/* answer button styles */
 .answer-list {
     width: 20%;
     height: 300px;
@@ -59,6 +70,36 @@ p {
     border-radius: 15px;
 }
 
+/* submit page styles */
+.submit-button {
+    font-size: 20px;
+    color: white;
+    margin: auto;
+    width: 250px;
+    height: 40px;
+    background-color: purple;
+    border-radius: 15px;
+}
+
+.name-input {
+    font-size: 24px;  
+}
+
+/* high score list styles */
 .player-list {
-    
+    margin: auto;
+    padding-left: 5px;
+    width: 20%;
+    text-align: left;
+    text-transform: uppercase;
+    list-style: none;
+    font-size: 20px;
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.player-list-item { 
+    border-bottom: 2px solid black;
 }
