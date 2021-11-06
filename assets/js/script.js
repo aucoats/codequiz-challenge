@@ -1,12 +1,8 @@
-    // Can get click event to start timer or timer to clear on high score list, not both
-
-
 var quizArea = document.querySelector("#quiz-area");
 var startButton = document.querySelector("#start");
 var viewHighscores = document.querySelector("#view-high-scores");
 var time = 75;
-
-var interval = setInterval(time);
+var interval;
 
 var quizQuestions = [
     {
@@ -51,23 +47,19 @@ var playerNames = []
 var pastScores = []
 
 
-startButton.addEventListener("click", function() {
-    var interval = setInterval(function() {
+function quizInterval() {
+    interval = setInterval(function() {
         
     document.getElementById('timer').textContent = "Time: " + time;
     time--;
     if (time === 0) {
-        clearInterval(interval);
+        // clearInterval(interval);
         document.getElementById('timer').textContent = 'Done.';
         alert("You have no time left.");
         enterHighscores();
     }   
-    // if (document.querySelector("#highscorealert")) {
-    //     clearInterval(interval);
-    // }
 }, 1000);
-});
-
+}
 
 function clearArea() {
     quizArea.innerHTML = "";
@@ -354,12 +346,12 @@ function answerCheckFour() {
         alert.className = "alert"
         quizArea.appendChild(alert);
     };
-    // clearInterval(interval);
-    enterHighscores();
+    clearInterval(interval);
+    enterHighscores(interval);
 }
 
-function enterHighscores() {
-    clearInterval(time);
+function enterHighscores(interval) {
+    clearInterval(interval);
     document.querySelector("#timer").textContent = "Done!"
     clearArea();
     var score = time;
@@ -385,11 +377,18 @@ function enterHighscores() {
 }
 
 function savePlayer() {
-    var playerNames = localStorage.getItem("playerNames");
-    var pastScores = localStorage.getItem("pastScores");
+    
+    if (!localStorage.getItem("playerNames") && !localStorage.getItem("pastScores")) {
+        var playerNames = [];
+        var pastScores = [];
+    } else 
+    {
+        var pastScores = localStorage.getItem("pastScores");
+        var playerNames = localStorage.getItem("playerNames");
 
-    playerNames = JSON.parse(playerNames);
-    pastScores = JSON.parse(pastScores);
+        playerNames = JSON.parse(playerNames);
+        pastScores = JSON.parse(pastScores);
+    }
     
     var score = time;
 
@@ -453,15 +452,13 @@ function goBack() {
     window.location.reload();
 }
 
-
-// function startHandler() {
-    
-//     startQuiz();
-// }
-
+function startHandler() {
+    quizInterval();
+    startQuiz();
+}
 
 
 viewHighscores.addEventListener("click", loadPlayers);
-startButton.addEventListener("click", startQuiz);
+startButton.addEventListener("click", startHandler);
 
 
