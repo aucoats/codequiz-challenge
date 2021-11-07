@@ -46,7 +46,7 @@ var quizQuestions = [
 var playerNames = []
 var pastScores = []
 
-
+// timer function
 function quizInterval() {
     interval = setInterval(function() {
         
@@ -61,10 +61,12 @@ function quizInterval() {
 }, 1000);
 }
 
+// clears quiz area
 function clearArea() {
     quizArea.innerHTML = "";
 }
 
+// populates header and quiz questions and sets attributes for header and quiz buttons
 function startQuiz() {
     
     clearArea();
@@ -282,6 +284,7 @@ function lastQuestion() {
     quizQuestions.shift();
 }
 
+// functions to check data of clicked button and call next question or enterHighscore()
 function answerCheckOne() {
     if (event.target.getAttribute("data-valid") == "incorrect") {
         
@@ -350,6 +353,7 @@ function answerCheckFour() {
     enterHighscores(interval);
 }
 
+// shows player score and allows player to input data
 function enterHighscores(interval) {
     clearInterval(interval);
     document.querySelector("#timer").textContent = "Done!"
@@ -376,6 +380,7 @@ function enterHighscores(interval) {
     quizArea.appendChild(saveScore);
 }
 
+// saves player data to local storage and calls loadPlayers after submit button is pressed
 function savePlayer() {
     
     if (!localStorage.getItem("playerNames") && !localStorage.getItem("pastScores")) {
@@ -398,13 +403,11 @@ function savePlayer() {
     playerNames.push(initials);
     pastScores.push(score);
 
-    console.log(playerNames);
-    console.log(pastScores);
-
     localStorage.setItem("playerNames", JSON.stringify(playerNames));
     localStorage.setItem("pastScores", JSON.stringify(pastScores));
 }
 
+// loads player data and creates a list
 function loadPlayers() {
     clearInterval(interval);
     clearArea();
@@ -443,21 +446,24 @@ function loadPlayers() {
    
 }
 
+// function to call functions to save player input and load previous players names and scores
 function dataHandler() { 
     savePlayer();
     loadPlayers();
 }
 
+// function to reload quiz
 function goBack() {
     window.location.reload();
 }
 
+// function to start quiz and timer
 function startHandler() {
     quizInterval();
     startQuiz();
 }
 
-
+// event listeneres to begin quiz and view high scores
 viewHighscores.addEventListener("click", loadPlayers);
 startButton.addEventListener("click", startHandler);
 
